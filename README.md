@@ -24,7 +24,7 @@
 * yum install salt-master，安装好salt-master后即有salt模块
 
 ###截图
-![image](https://github.com/lijc210/ops/tree/master/static/images/ops.png)
+![image](https://github.com/lijc210/ops/raw/master/static/images/ops.png)
 
 ###联系
 * www.pythoning.cn
