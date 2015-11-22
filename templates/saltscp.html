@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block right_top %}
+		<div class="right-top ">
+            <ol class="breadcrumb">
+                <span class="glyphicon glyphicon-home"></span>
+                <li>您当前位置:</li>
+                <li><a href="{{ SITE_URL }}">首页</a></li>
+                <li>>远程管理</li>
+                <li class="active">文件传送</li>
+                <div class="user yf">
+                    <span>欢迎您！</span>
+                    <span><a href="">张山</a></span>
+                    <span><a href="">修改密码</a></span>
+                    <span><a href="">设置</a></span>
+                    <span><a href="">退出</a></span>
+                </div>
+            </ol>
+		</div>
+{% endblock %}
+{% block content %}
+    <div class="content clearfix">
+        <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          使用说明
+        </a>
+        <div class="collapse" id="collapseExample">
+          <div class="well">
+            file.append作用是添加文本到文件末尾。例如添加abc到/usr/local/test.txt,在命令框输入/usr/local/test.txt,'abc'
+          </div>
+        </div>
+        <div class="scp ">
+            <h4>文件传送：</h4>
+            <form class="saltcmd" action="" method="post">
+                {% csrf_token %}
+                <select class="expr_form" onchange="selectSort(this.value)" onblur="this.className='expr_form';" onMouseOver="$(this).tooltip('show')" data-toggle="tooltip" title="glob是按id匹配，nodegroup是按组匹配" data-placement="bottom" >
+                    <option value="glob"> glob </option>
+                    <option value="nodegroup">nodegroup </option>
+                </select>
+
+                <select class="tgt"  id="sel" onchange="changeF();" onMouseOver="$(this).tooltip('show')">
+                    <option disabled>---glob---</option>
+                    <option value="*">*</option>
+                    {% for id in minions %}
+                    <option value="{{ id }}">{{ id }}</option>
+                    {% endfor %}
+                    <option disabled>---nodegrou---</option>
+                    {% for group in group_list %}
+                    <option value="{{ group }}">{{ group }}</option>
+                    {% endfor %}
+                    <OPTION id="99999" VALUE="" SELECTED>
+                    <input class="tgttxt" type="text" id="txt" value=""  placeholder="选择或输入" onMouseOver="$(this).tooltip('show')" data-toggle="tooltip" title="客户端id或组" data-placement="bottom" />
+                </select>
+
+                <select class="fun" onchange="selectSort(this.value)"  onblur="this.className='fun';" >
+                    <option value="cp.get_file">cp.get_file</option>
+                    <option value="cp.get_dir">cp.get_dir</option>
+                </select>
+
+                <input class="file_roots" placeholder="{{ file_roots }}" value="" disabled="true">
+                <input class="master arg" placeholder="master文件或者目录&nbsp;,&nbsp;minion文件或者目录" value="">
+
+                <select class="gzip" onchange="selectSort(this.value)"  onblur="this.className='gzip';" onMouseOver="$(this).tooltip('show')" data-toggle="tooltip" title="1代表作小压缩，9代表最大压缩，传压缩包必须选择None" data-placement="bottom">
+                    <option value="None">None</option>
+                    <option value="9">9</option>
+                    <option value="8">8</option>
+                    <option value="7">7</option>
+                    <option value="6">6</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                <input class="btn btn-danger zhixing" type="button" value="执行">
+            </form>
+        </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">返回结果:（只返回id或没有返回，表示执行不成功）&nbsp; 查看所有minion状态：<button class="status">manage.status</button></h3>
+                </div>
+                <div class="panel-body" >
+                    <div id="wait" style="display: none">
+                        <img src="{% static 'images/wait.gif' %}">
+                        </div>
+                    <pre class="ret">
+                    </pre>
+                </div>
+            </div>
+		</div>
+{% endblock %}
