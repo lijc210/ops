@@ -1,4 +1,4 @@
-## ops运维管理系统 
+## ops运维管理系统 (暂不维护)
 
 ###功能
 * 命令执行
@@ -27,5 +27,5 @@
 ![image](https://github.com/lijc210/ops/raw/master/static/images/ops.png)
 
 ###联系
-* www.pythoning.cn
+* lijc210@163.com
 
